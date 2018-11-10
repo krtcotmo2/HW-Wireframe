@@ -1,0 +1,109 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size:15px;
+    color:#777;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+h1{font-family:'Georgia', Times, Times New Roman, serif; font-size:22px; font-weight: bold;}
+ol, ul {
+	list-style: none;
+}
+p{line-height: 30px;}
+p+p{margin:40px 0px;}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body{background: url(images/topography.png);}
+nav{
+    position: fixed;
+    width:100%;
+    top:0px;
+    height:80px;
+    border-bottom:2px solid #ccc;
+    background: #fff;
+}
+nav h1{
+    background:#4aaaa5;
+    line-height: 80px;
+    display: inline-block;
+    padding:0px 35px;
+    color:white;
+}
+nav ul{float: right;padding:0px;margin:0px;}
+nav li{
+    display: inline-block;
+    padding: 15px 6px;
+    margin: 17.5px 6px;
+    cursor: pointer;
+}
+nav li:last-child{margin-right:0px; padding-right:0px;}
+nav a:link, nav a:visited{color:#777}
+nav a{text-decoration: none;}
+nav li:hover, nav li:hover a{
+    color:#336699;
+    text-decoration: underline;
+}
+footer{
+    background: #666;
+    border-top: 2px solid #4aaaa5;
+    height:60px;
+    position: fixed;
+    bottom: 0px;
+    width:100%;
+    color:white;
+    text-align: center;
+    padding-top:40px;
+}
+.wrapper{
+    width:960px;
+    margin:0 auto;
+}
+.maincontent{
+    margin-top:120px;
+    background-color:#fff;
+    border: 1px solid #ddd;
+    padding:0 30px 30px 30px;
+}
+.maincontent h1{
+    color:#4aaaa5;
+    border-bottom:2px #ddd solid;
+    margin-bottom:30px;
+    padding:35px 0;
+}
+.maincontent p img{
+    float:left;
+    padding:8px 24px 12px 0px;
+}
+.maincontent p:first-child{margin-top:0px;}
