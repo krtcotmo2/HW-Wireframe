@@ -30,7 +30,9 @@ table {
 	border-spacing: 0;
 }
 
-body{background: url(../images/topography.png);}
+body{background-image:linear-gradient(
+    rgba(92,125,123, 0.2),rgba(92,125,123, 0.2)
+  ),url(../images/topography.png); }
 nav{
     position: fixed;
     width:100%;
@@ -38,6 +40,7 @@ nav{
     height:80px;
     border-bottom:2px solid #ccc;
     background: #fff;
+    z-index: 999;
 }
 nav h1{
     background:#4aaaa5;
@@ -61,7 +64,7 @@ nav li:last-child{margin-right:0px; padding-right:0px;}
 nav a:link, nav a:visited{color:#777}
 nav a{text-decoration: none;}
 nav li:hover, nav li:hover a{
-    color:#336699;
+    color:#5c7d7b;
     text-decoration: underline;
 }
 footer{
@@ -101,7 +104,7 @@ footer{
 form{padding-bottom:30px;}
 form input, form textarea{
     width:100%;
-    border:#4aaaa5 1px solid;
+    border:rgb(92,125,123) 1px solid;
     margin:6px 0px;
     padding:6px;
 }
