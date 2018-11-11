@@ -25,22 +25,23 @@ h1, p{
 article{padding:12px;}
 .container {
 	overflow: hidden;
-		width: 100%;
+	width: 100%;
   }
 section{
 	width:495px;
 	float:left;
 	padding:6px;
-	margin:12px 0px;
+	margin:12px 0px;	
 	padding-bottom: 500em;
-  	margin-bottom:  calc(-500em + 24px);
+	margin-bottom:  calc(-500em + 24px);
 }
 aside{
 	margin:12px 0px 12px 25px;
 	float:left;
-	padding-bottom: 500em;
-	margin-bottom: calc(-500em + 24px);
 	width:392px;
+	padding-bottom: 500em;	
+	margin-bottom: calc(-500em + 24px);	
+	
 }
 
 footer{margin-top:24px;clear:both;}
