@@ -1,6 +1,9 @@
 *{box-sizing: border-box;}
 .red1 div h2{margin:0px;padding:0px; font-size:32px;}
-
+a:link,a:hover,a:visited{
+    text-decoration: none;
+    color:black;
+}
 @font-face {
     font-family: 'kremlin';
     src: url('../fonts/kremlin.ttf');
@@ -120,7 +123,20 @@ transform-origin: 280px 0px;
 .icon:hover span{
     opacity: 1;
 }
-
+form input, form textarea{
+    width:40%;
+    border:rgb(92,125,123) 1px solid;
+    margin:6px 0px;
+    padding:8px;
+}
+form input[type="submit"]{
+    padding:6px;
+    background: blue;
+    display: inline;
+    color:white;
+    width:auto;
+    margin-top:12px;
+}
 @media screen and (max-width:1200px){
     .wrapper{
         top:-100px;
@@ -150,6 +166,12 @@ transform-origin: 280px 0px;
     }
     .bottomYellow{
         left:-650px;
+    }
+    form input, form textarea{
+        width:50%;
+        border:rgb(92,125,123) 1px solid;
+        margin:6px 0px;
+        padding:8px;
     }
 }
 @media screen and (max-width:900px){
@@ -189,6 +211,12 @@ transform-origin: 280px 0px;
     .bottomYellow{
         top:200px;
     }
+    form input, form textarea{
+        width:60%;
+        border:rgb(92,125,123) 1px solid;
+        margin:6px 0px;
+        padding:8px;
+    }
 }
 @media screen and (max-width:750px){
     .contentHolder p{
@@ -198,6 +226,12 @@ transform-origin: 280px 0px;
         position: absolute;
         left:300px;
         top:calc((100% - 200px) / 2);
+    }
+    form input, form textarea{
+        width:75%;
+        border:rgb(92,125,123) 1px solid;
+        margin:6px 0px;
+        padding:8px;
     }
 }
 @media screen and (max-width:500px){
@@ -277,7 +311,7 @@ transform-origin: 280px 0px;
         background:#000;
         height:60px;
         overflow: hidden;
-        transition: 1.5s;
+        transition: 0.5s;
         color:white;  
     }
     .bioText2 h1{
@@ -295,7 +329,11 @@ transform-origin: 280px 0px;
     }
     .bioText2:hover{
         height:180px;
-        transition: 1.5s;
+        transition: 0.5s;
     }
     .bottomYellow{display: none;}
+    a:link,a:hover,a:visited{
+        text-decoration: none;
+        color:white;
+    }
 }

@@ -124,6 +124,18 @@ form input[type="submit"]{
     .wrapper{
         width:100%;
         margin:0 auto;
-        min-width: 470px;;
+        min-width: 470px;
     }
+}
+
+@media screen and (max-width:470px){
+    .wrapper{width:100%;
+        min-width: 100%;
+    }
+    nav{
+        border:none;
+    }
+    nav ul{float:none;background: #fff; border-bottom:1px solid black; margin-right:0px;}
+    nav li{margin:0px 6px;}
+    nav h1{width:100%;}
 }
