@@ -1,0 +1,418 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimuim-scale=1">
+<title>Loation Data</title>
+<style>
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	box-sizing: border-box;
+	vertical-align: top;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+html, body, #viewDiv {
+        padding:0;
+        margin:0;
+        height:100%;
+      }
+	html{
+	 height:calc(100% - 130px);
+	}
+#viewDiv{	
+	border: 1px solid black;	
+	bottom:100px;
+	top:0px;
+	height:100%;
+}
+
+#hyperlinkArea {
+	bottom:0px;
+}
+.otherLinks{
+	width:50%;
+	padding:12px;
+	text-align:center;
+	display: inline-block;
+}
+	.dijitTooltipContents.dijitTooltipFocusNode {padding:0px;}
+.dijitTooltipContents.dijitTooltipFocusNode p {
+    padding: 5px;
+}
+	.contentPane h3{		
+	line-height: 1.5;
+    padding: 5px;
+    color: black;
+    margin: 0px;
+    font-weight: bold;
+	}
+
+	.dijitTooltipContainer{border: 1px solid black !important; background:rgba(255,255,255,0.75) !important;}
+	#tooltipDialog{opacity: 1 !important;}
+	
+	
+/*
+/* Smartphones (portrait and landscape) ----------- 
+@media only screen and (min-device-width : 0px) and (max-device-width : 480px) and (orientation: portrait){
+	#viewDiv, #hyperlinkArea {	
+		width:100%;
+		left:0px;
+		right:0px;
+	}
+	#viewDiv{	
+		border: 1px solid black;
+		bottom:180px
+	}
+}
+*/
+/* Smartphones (landscape) ----------- 
+@media only screen and (orientation: landscape) {
+	#viewDiv, #hyperlinkArea {
+		width:100%;
+		left:0px;
+		right:0px;	
+	}
+	#viewDiv{	
+		bottom:120px;
+		border: 1px solid black;
+	}
+}
+*/
+/* Smartphones (portrait) ----------- 
+@media only screen and (max-width : 320px) {
+	#viewDiv, #hyperlinkArea {
+		left:0px;
+		right:0px;
+		margin: 0px 0 12px 0;		
+	}
+	#viewDiv{	
+		border: 1px solid black;
+		min-height: 375px;
+	}
+}
+*/
+/* iPads (portrait and landscape) ----------- 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	#viewDiv, #hyperlinkArea {
+		width:100%;
+		left:0px;
+		right:0px;
+		margin: 0px 0 12px 0;			
+	}
+	#viewDiv{	
+		border: 1px solid black;
+	}
+}
+*/
+	#info {
+        background: #fff;
+        box-shadow: 0 0 5px #888;
+        left: 1em;
+        padding: 0.5em;
+        position: absolute;
+        top: 1em;
+        z-index: 40;
+      }
+	.arcgisSearch .searchBtn {
+    display: block;
+    float: left;
+    padding: 6px 12px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #57585A;
+    -webkit-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+    background-color: #fff;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+	#search {
+      display: block;
+      position: absolute;
+      z-index: 2;
+      top: 20px;
+      left: 74px;
+    }
+</style>
+</head>
+
+<body>
+	<div id="search"></div>
+<section id="viewDiv">
+	
+</section>
+	<section id="hyperlinkArea"></section>
+	<link rel="stylesheet" href="https://js.arcgis.com/3.26/dijit/themes/tundra/tundra.css">
+<link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/css/esri.css">
+<script src="https://js.arcgis.com/3.26/"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+<script>
+	var compare, surface;
+	require([
+      	"esri/map", 
+		"esri/dijit/Search",
+		"esri/Color", 
+		"esri/layers/FeatureLayer",
+		"esri/renderers/UniqueValueRenderer",
+		"esri/tasks/query",
+		"esri/InfoTemplate",
+		"esri/symbols/SimpleLineSymbol",
+        "esri/symbols/SimpleFillSymbol", 
+		"esri/symbols/SimpleMarkerSymbol",		
+        "esri/renderers/SimpleRenderer", 
+		"esri/graphic", 
+		"esri/lang",        
+		"dojo/number", 
+		"dojo/dom-style", 
+		"esri/geometry/Circle",
+        "dijit/TooltipDialog", 
+		"dijit/popup", "dojo/domReady!"
+    ], function(Map, 
+				 Search,
+				 Color,
+				 FeatureLayer,
+				 UniqueValueRenderer,
+				 Query,
+				 InfoTemplate,
+				 SimpleLineSymbol,
+        SimpleFillSymbol, SimpleMarkerSymbol,
+        SimpleRenderer, Graphic, esriLang,  
+         number, domStyle, Circle,
+        TooltipDialog, dijitPopup) {
+
+      	var map = new Map("viewDiv",{
+        basemap: "satellite",
+		center: [-82.411,27.409],
+        zoom: 14
+      });      
+     	
+		
+		var subs = new FeatureLayer("https://services2.arcgis.com/XS7JKtqtY6stbXzM/ArcGIS/rest/services/WebTrial_Working_20180822/FeatureServer/3",{
+		  mode: FeatureLayer.MODE_SNAPSHOT,
+		  outFields: ["OWNER", "Parcel_ID", "PRIMARY_AD", "PROP_CITYN", "SUBDIVISIO"]
+		});
+		var divisions = new SimpleFillSymbol(
+			SimpleFillSymbol.STYLE_SOLID
+		);
+		map.addLayer(subs);		
+		var streets = new FeatureLayer("https://services2.arcgis.com/XS7JKtqtY6stbXzM/ArcGIS/rest/services/WebTrial_Working_20180822/FeatureServer/1", {
+			mode: FeatureLayer.MODE_SNAPSHOT
+		});		
+		streets.setDefinitionExpression("Trail_Name = 'Sidewalk Trails'");
+		var lines = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255,255,255, 0.35]), 2);
+		streets.setRenderer(new SimpleRenderer(lines));
+		map.addLayer(streets);					
+		
+		//TRAILS INFO TEMPLATE
+		var infoTemplate = new InfoTemplate();
+          infoTemplate.setTitle("Trail");
+          infoTemplate.setContent("<p>Trail Name: ${Trail_Name}<p><p>Miles: ${Miles:compare}</p><p>Surface: ${DESC_:surface}</p> ");
+		//TRAILS VALUE RENDERERS
+		compare = function(value, key){            
+            return Math.round(value*100)/100;			
+		}
+		surface = function(value, key){   
+			if(value.toLowerCase() == "soft"){
+				return "Unpaved";
+			}
+            return "Paved";			
+		}
+		var trails = new FeatureLayer("https://services2.arcgis.com/XS7JKtqtY6stbXzM/ArcGIS/rest/services/WebTrial_Working_20180822/FeatureServer/1", {
+			infoTemplate: infoTemplate,
+		  	mode: FeatureLayer.MODE_SNAPSHOT,
+		  	outFields: ["Trail_Name","Miles", "DESC_"]
+		});	
+		//TRAILS RENDERER DEFINITIONS
+		trails.setDefinitionExpression("Trail_Name <> 'Sidewalk Trails'");		
+		var defaultLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL);	
+		var trailRenderer = new UniqueValueRenderer(null, "Trail_Name");
+		trailRenderer.addValue("LWR Trail 1", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([38, 173, 124]), 2));
+		trailRenderer.addValue("LWR Trail 2", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([34, 105, 153]), 2));
+		trailRenderer.addValue("LWR Trail 3", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([196, 47, 107]), 2));
+		trailRenderer.addValue("LWR Trail 4", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([168, 66, 86]), 2));
+		trailRenderer.addValue("LWR Trail 5", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([156, 62, 140]), 2));
+		trailRenderer.addValue("LWR Trail 6", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([194, 99, 41]), 2));
+		trailRenderer.addValue("LWR Trail 7", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([34, 105, 153]), 2));
+		trailRenderer.addValue("LWR Trail 8", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([21, 148, 179]), 2));
+		trailRenderer.addValue("LWR Trail 9", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([70, 53, 196]), 2));
+		trailRenderer.addValue("LWR Trail 10", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([245,143,3]), 2));
+		trailRenderer.addValue("LWR Trail 11", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([120, 38, 153]), 2));
+		trailRenderer.addValue("LWR Trail 12", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,new Color([58, 189, 189]), 2));
+		trailRenderer.addValue("LWR Trail 13", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([80, 158, 60]), 2));
+		trailRenderer.addValue("LWR Trail 14", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([181, 60, 49]), 2));
+		trailRenderer.addValue("LWR Trail 15", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([94, 41, 178]), 2));
+		trailRenderer.addValue("LWR Trail 16", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([37, 74, 153]), 2));
+		trailRenderer.addValue("LWR Trail 17", new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([169,201,60]), 2));
+        trails.setRenderer(trailRenderer);			
+		map.addLayer(trails);
+		
+		//PARCEL INFO TEMPLATE
+		var parcelTemplate = new InfoTemplate();
+          parcelTemplate.setTitle("Property");
+          parcelTemplate.setContent("<h3>${PRIMARY_AD}</h3><p>Parcel ID: ${PARCEL_ID}</p><p>Owner: ${OWNER}</p>");		
+		var parcels = new FeatureLayer("https://services2.arcgis.com/XS7JKtqtY6stbXzM/ArcGIS/rest/services/WebTrial_Working_20180822/FeatureServer/2",{
+		  infoTemplate: parcelTemplate,
+		  mode: FeatureLayer.MODE_SNAPSHOT,
+		  outFields: ["OWNER", "PARCEL_ID", "PRIMARY_AD", "PROP_CITYN", "SUBDIVISIO"]
+		});
+		var plots = new SimpleFillSymbol(
+			SimpleFillSymbol.STYLE_SOLID,
+			new SimpleLineSymbol(
+				SimpleLineSymbol.STYLE_SOLID,
+				new Color([0,0,0, 0.33]),
+				1),			
+			new Color([255,255,225,0.25]));	
+		parcels.setRenderer(new SimpleRenderer(plots));
+		parcels.on("click", function(evt){
+			let plotID = evt.graphic.attributes["PARCEL_ID"];
+			let urlStr = "https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/WebTrial_Working_20180822/FeatureServer/2/query?where=PARCEL_ID%3D+"+plotID+"&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=Parcel_ID%2CCDD_CONT%2CEVENTS%2CHOA_CONT%2CIRRIGATION%2CPRIMARY_AD&returnGeometry=false&returnCentroid=false&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pgeojson&token=";		
+			getLookupData(urlStr);
+		});
+		map.addLayer(parcels);
+		
+		//TRAIL HEAD INFO TEMPLATE
+		var trailHTemplate = new InfoTemplate();
+          trailHTemplate.setTitle("Trail Head");
+          trailHTemplate.setContent("Marker ID: ${Marker_ID}");
+		var trailHeads = new FeatureLayer("https://services2.arcgis.com/XS7JKtqtY6stbXzM/ArcGIS/rest/services/WebTrial_Working_20180822/FeatureServer/0", {
+		  	infoTemplate: trailHTemplate,
+			mode: FeatureLayer.MODE_SNAPSHOT,
+		  	outFields: ["Marker_ID","OBJECTID"]
+		});
+		var theMarker = new SimpleMarkerSymbol();
+		theMarker.style = SimpleMarkerSymbol.STYLE_Circle;
+		theMarker.setSize(8);
+		theMarker.setColor(new Color([255,255,0]));
+		theMarker.outline = new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL);					
+		var defaultMarker = theMarker;	
+		var markerRenderer = new UniqueValueRenderer(defaultMarker, "Marker_ID");
+		trailHeads.setRenderer(markerRenderer);
+		map.addLayer(trailHeads);
+		
+		//map.infoWindow.resize(245,125);		
+		map.on("load", function(){
+			map.graphics.enableMouseEvents();			
+		});	
+		var search = new Search({				
+        		enableLabel: false,
+        		enableInfoWindow: true,
+        		showInfoWindowOnSelect: true,				
+				map: map
+			 }, "search");
+		search.startup();
+		search.on('search-results', function(e) {
+			console.log ('search results', e);
+			getLookupData(e.results[0][0].feature.attributes["StAddr"]);
+		});	
+		map.infoWindow.on("SelectionChange", function(evt){			
+			if(this.features && this.features[this.selectedIndex].attributes["PARCEL_ID"]){				
+				let plotID = this.features[this.selectedIndex].attributes["PARCEL_ID"];
+				let urlStr = "https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/WebTrial_Working_20180822/FeatureServer/2/query?where=PARCEL_ID%3D+"+plotID+"&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=Parcel_ID%2CCDD_CONT%2CEVENTS%2CHOA_CONT%2CIRRIGATION%2CPRIMARY_AD&returnGeometry=false&returnCentroid=false&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pgeojson&token=";		
+				getLookupData(urlStr);	
+			}
+		});
+		
+	});
+	
+	$(document).ready(function(){
+		let plotID = 588427450;
+		let urlStr = "https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/WebTrial_Working_20180822/FeatureServer/2/query?where=PARCEL_ID%3D+"+plotID+"&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=Parcel_ID%2CCDD_CONT%2CEVENTS%2CHOA_CONT%2CIRRIGATION%2CPRIMARY_AD&returnGeometry=false&returnCentroid=false&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pgeojson&token=";		
+		getLookupData(urlStr);	
+		
+		
+	});
+	function getLookupData(u){		
+		$.ajax({
+			type: "POST",
+			url: u,
+			dataType: 'json',
+			success: function(data){
+				if(data.features.length == 0){
+					$("#hyperlinkArea").html("<span class='otherLinks' style='width:100%'>Please enter in a valid street adress</span>");
+					return;
+				}
+				var returnedData = data.features[0].properties;
+				$("#hyperlinkArea").html("<span class='otherLinks' style='width:100%'>"+returnedData["PRIMARY_AD"]+" </span>");
+				
+				$.each(returnedData, function(i, v){
+					let txt;
+					if(i=== "PARCEL_ID" || i==="PRIMARY_AD"){
+						 return;
+					}					   
+					switch(i){
+						case "CDD_CONT":
+							txt = " Community Development District Members";
+						   break;
+						case "HOA_CONT":
+							txt = "Home Owners Association Members";
+						   break;
+						case "EVENTS":
+							txt = "Upcoming Events";	
+						   break;
+						case "IRRIGATION":
+							txt = "Irrigation Schedules";	
+						   break;
+						default:
+						   break;
+					}
+					if(v==null){
+						$("#hyperlinkArea").append("<span class='otherLinks'>"+txt + " is not currently available</span>");
+					}else{
+						$("#hyperlinkArea").append("<a href='"+v+"' class=otherLinks target='_blank'>"+txt+"</a>");
+					}
+				});
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert("Error in loading data");
+			}
+		});			
+	}
+		
+	
+</script>
+</body>
+</html>
