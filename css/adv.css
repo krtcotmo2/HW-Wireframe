@@ -113,8 +113,8 @@ form input[type="submit"]{
     background: #4aaaa5;
     display: inline;
     color:white;
-    width:auto;
-    margin-top:12px;
+    /* width:auto;
+    margin-top:12px; */
 }
 
 @media screen and (max-width:959px){
