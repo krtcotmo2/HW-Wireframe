@@ -18,7 +18,7 @@ ol, ul {
 p{line-height: 24px;}
 p+p{margin:30px 0px;}
 blockquote, q {
-	quotes: none;
+    quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {

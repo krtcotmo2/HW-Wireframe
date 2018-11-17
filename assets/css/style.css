@@ -36,9 +36,9 @@ section{
 	margin-bottom:  calc(-500em + 24px);
 }
 aside{
-	margin:12px 0px 12px 25px;
-	float:left;
-	width:392px;
+	margin:12px 0px 12px 0px;
+	float:right;
+	width:445px;
 	padding-bottom: 500em;	
 	margin-bottom: calc(-500em + 24px);	
 	
