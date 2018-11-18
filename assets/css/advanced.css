@@ -138,4 +138,9 @@ form input[type="submit"]{
     nav ul{float:none;background: #fff; border-bottom:1px solid black; margin-right:0px;}
     nav li{margin:0px 6px;}
     nav h1{width:100%;}
+    ul li{
+        width:32%;
+        margin:0px;
+        text-align: center;
+    }
 }
